@@ -10,7 +10,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "nesbot/carbon": "^2.68",
-        "illuminate/support": "^10.17"
+        "php": "^8.2",
+         "nesbot/carbon": "^3.10"
     }
 }
