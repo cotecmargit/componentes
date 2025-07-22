@@ -1,0 +1,16 @@
+{
+    "name": "cotecmar/servicio",
+    "description": "Libreria Cotecmar",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Cotecmar\\Servicio\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "nesbot/carbon": "^2.68",
+        "illuminate/support": "^10.17"
+    }
+}
