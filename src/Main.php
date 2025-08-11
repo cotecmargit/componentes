@@ -3,7 +3,6 @@
 namespace Cotecmar\Servicio;
 
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 class Main
 {
@@ -99,7 +98,8 @@ class Main
         $año = substr($fecha, 0, 4);
         $mes = substr($fecha, 4, 2);
         $dia = substr($fecha, 6, 2);
-        $fechaMin = Carbon::createFromDate($año, $mes, $dia);
+        // $fechaMin = Carbon::createFromDate($año, $mes, $dia);
+        $fechaMin = self::crearFecha($año, $mes, $dia);
         return $fechaMin;
     }
 
@@ -133,5 +133,11 @@ class Main
             new ObjectGeneral(1, 'BGD', 'Bocagrande'),
             new ObjectGeneral(1, 'MAM', 'Mamonal'),
         ];
+    }
+
+    public static function crearFecha($año, $mes, $dia)
+    {
+        // Retorna un objeto DateTime con la fecha especificada
+        return new \DateTime("$año-$mes-$dia");
     }
 }
