@@ -140,4 +140,69 @@ class Main
         // Retorna un objeto DateTime con la fecha especificada
         return new \DateTime("$año-$mes-$dia");
     }
+
+    public static function costTypes()
+    {
+        return [
+            new ObjectGeneral(1, 'MATERIALES', ''),
+            new ObjectGeneral(2, 'MOD', ''),
+            new ObjectGeneral(3, 'SERVICIOS', ''),
+            new ObjectGeneral(4, 'CIF', '')
+        ];
+    }
+
+    
+    // function identificarTipoHorario($fechaInicio, $fechaFin, $extra = false, $esFestivo = false, $esDominical = false)
+    // {
+    //     $inicio = Carbon::parse($fechaInicio);
+    //     $fin = Carbon::parse($fechaFin);
+
+    //     // Horarios según ley 2466 (2025)
+    //     $diurnoInicio = 6;   // 6 AM
+    //     $diurnoFin = 19;     // 7 PM
+    //     $nocturnoInicio = 19; // 7 PM
+    //     $nocturnoFin = 6;    // 6 AM (siguiente día)
+
+    //     $tipoHorario = '';
+
+    //     // Funciones auxiliares para saber si hora está en intervalo nocturno
+    //     $esHoraNocturna = function ($hora) use ($nocturnoInicio, $nocturnoFin) {
+    //         return ($hora >= $nocturnoInicio || $hora < $nocturnoFin);
+    //     };
+
+    //     $horaInicio = $inicio->hour;
+
+    //     if (!$extra) {
+    //         if ($esFestivo || $esDominical) {
+    //             if ($esHoraNocturna($horaInicio)) {
+    //                 $tipoHorario = 'HORARIO_DOMINICAL_FESTIVO_NOCTURNO';
+    //             } else {
+    //                 $tipoHorario = 'HORARIO_DOMINICAL_FESTIVO_DIURNO';
+    //             }
+    //         } else {
+    //             if ($esHoraNocturna($horaInicio)) {
+    //                 $tipoHorario = 'HORARIO_ORDINARIO_CON_RECARGO_NOCTURNO';
+    //             } else {
+    //                 $tipoHorario = 'HORARIO_ORDINARIO';
+    //             }
+    //         }
+    //     } else {
+    //         // Si es hora extra
+    //         if ($esFestivo || $esDominical) {
+    //             if ($esHoraNocturna($horaInicio)) {
+    //                 $tipoHorario = 'HORAS_EXTRA_DOMINICAL_FESTIVO_NOCTURNO';
+    //             } else {
+    //                 $tipoHorario = 'HORAS_EXTRA_DOMINICAL_FESTIVO_DIURNO';
+    //             }
+    //         } else {
+    //             if ($esHoraNocturna($horaInicio)) {
+    //                 $tipoHorario = 'HORAS_EXTRA_NOCTURNAS';
+    //             } else {
+    //                 $tipoHorario = 'HORAS_EXTRA_DIURNAS';
+    //             }
+    //         }
+    //     }
+
+    //     return $tipoHorario;
+    // }
 }
