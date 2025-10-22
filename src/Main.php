@@ -144,10 +144,10 @@ class Main
     public static function costTypes()
     {
         return [
-            new ObjectGeneral(1, 'MATERIALES', ''),
-            new ObjectGeneral(2, 'MOD', ''),
-            new ObjectGeneral(3, 'SERVICIOS', ''),
-            new ObjectGeneral(4, 'CIF', '')
+            new ObjectGeneral(1, 'MATERIALES', 'Materiales'),
+            new ObjectGeneral(2, 'MOD', 'Mano de Obra'),
+            new ObjectGeneral(3, 'SERVICIOS', 'Servicios'),
+            new ObjectGeneral(4, 'CIF', 'Costos Indirectos de Fabricación')
         ];
     }
 
