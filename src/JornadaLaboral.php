@@ -207,7 +207,10 @@ class JornadaLaboral
             // Actualiza el tipo de día para el siguiente segmento
             $tipoDia = self::esFestivoODomingo($segmentoFin->toDateString()) ? 'DF' : 'ORD';
         }
-
+        // Redondea las horas acumuladas en cada categoría a un decimal
+        foreach ($resultados as $key => $value) {
+            $resultados[$key] = round($value, 1);
+        }
         // Retorna el array con el total de horas acumuladas por categoría
         return $resultados;
     }
