@@ -3,6 +3,8 @@
 namespace Cotecmar\Servicio;
 
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+
 
 class Main
 {
@@ -90,7 +92,17 @@ class Main
 
     public static function contarFechasEnMes($fechainicio, $fechafinal)
     {
-        return (($fechafinal->year - $fechainicio->year) * 12) + $fechafinal->month - $fechainicio->month;
+        // Normalizar a Carbon
+        $fechainicio = $fechainicio instanceof Carbon
+            ? $fechainicio
+            : Carbon::parse($fechainicio);
+
+        $fechafinal = $fechafinal instanceof Carbon
+            ? $fechafinal
+            : Carbon::parse($fechafinal);
+
+        return (($fechafinal->year - $fechainicio->year) * 12)
+            + ($fechafinal->month - $fechainicio->month);
     }
 
     public static function fechaConvertirSAP($fecha)
