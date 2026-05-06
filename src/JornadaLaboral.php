@@ -19,17 +19,6 @@ class JornadaLaboral
 
     public static function obtenerSegmentos($fecha, $horaEntrada, $horaSalida, $calendario)
     {
-        // Ejemplo de uso del calendario con franjas horarias recurrentes de trabajo y descanso
-        // $calendario = [
-        //     [
-        //         'recurrentStartDate' => "on Mon,Tue,Wed,Thu,Fri at 07:00",
-        //         'recurrentEndDate' => "on Mon,Tue,Wed,Thu,Fri at 15:00",
-        //     ],
-        //     // [
-        //     //     'recurrentStartDate' => "on Mon,Tue,Wed,Thu,Fri at 13:00",
-        //     //     'recurrentEndDate' => "on Mon,Tue,Wed,Thu,Fri at 16:30",
-        //     // ]
-        // ];
 
         // Determina si el día es festivo o domingo para clasificar el tipo de día (DF para festivo, ORD para ordinario)
         $tipoDia = self::esFestivoODomingo($fecha) ? 'DF' : 'ORD';
@@ -221,6 +210,8 @@ class JornadaLaboral
         // $salarioMensualCosto = $salarioMensual * 1.66;
 
         $total = 0;
+        $detalleCostoPorTipo = [];
+
         foreach ($horasPorTipo as $tipo => $horas) {
             if (isset(self::$tipos[$tipo])) {
                 $tipoInfo = self::$tipos[$tipo];
@@ -229,10 +220,29 @@ class JornadaLaboral
                 else
                     $valorBaseHoraMes = $salarioMensualCosto / 240; // Valor hora base mensual
 
-                $total += $valorBaseHoraMes * $tipoInfo['porcentaje'] * $horas;
+                $valorTipo = $valorBaseHoraMes * $tipoInfo['porcentaje'] * $horas;
+                // ✅ acumula total
+                $total += $valorTipo;
+
+                // ✅ guarda el detalle en la variable estática
+                $detalleCostoPorTipo[] = [
+                    'tipo' => $tipo,
+                    'horas' => $horas ?? 0,
+                    'valorHora' => round($valorBaseHoraMes, 2) ?? 0,
+                    'porcentaje' => $tipoInfo['porcentaje'] ?? 0,
+                    'valor' => round($valorTipo, 2) ?? 0,
+                ];
             }
         }
-        return $total;
+        // return $total;
+        return [
+            'total' => round($total, 2),
+            'detallePorTipo' => $detalleCostoPorTipo,
+            'resumen' => [
+                'tiposCalculados' => count($detalleCostoPorTipo),
+                'horasTotales' => array_sum(array_column($horasPorTipo, 1 ?? 0)),
+            ]
+        ];
     }
     public static function esFestivoODomingo($fecha)
     {
@@ -384,6 +394,5 @@ class JornadaLaboral
         return date('Y-m-d', strtotime("$anio-$mes-$dia"));
     }
 
-    // $resultados = JornadaLaboralHelper::obtenerSegmentos('2025-10-22', '20:00', '04:00', $calendario);
 
 }
