@@ -7,14 +7,14 @@ use Carbon\Carbon;
 class JornadaLaboral
 {
     public static $tipos = [
-        'ORD' => ['tipoDia' => 'ORD', 'inicio' => '06:00', 'fin' => '17:00', 'porcentaje' => 1],
-        'RN' => ['tipoDia' => 'ORD', 'inicio' => '17:00', 'fin' => '06:00', 'porcentaje' => 1.35],
-        'HED' => ['tipoDia' => 'ORD', 'inicio' => '06:00', 'fin' => '17:00', 'porcentaje' => 1.25],
-        'HEN' => ['tipoDia' => 'ORD', 'inicio' => '17:00', 'fin' => '06:00', 'porcentaje' => 1.75],
-        'DF' => ['tipoDia' => 'DF', 'inicio' => '06:00', 'fin' => '17:00', 'porcentaje' => 1.80],
-        'DFRN' => ['tipoDia' => 'DF', 'inicio' => '17:00', 'fin' => '06:00', 'porcentaje' => 2.1],
-        'DFHED' => ['tipoDia' => 'DF', 'inicio' => '06:00', 'fin' => '17:00', 'porcentaje' => 2],
-        'DFHEN' => ['tipoDia' => 'DF', 'inicio' => '17:00', 'fin' => '06:00', 'porcentaje' => 2.5],
+        'ORD' => ['tipoDia' => 'ORD', 'inicio' => '06:00', 'fin' => '19:00', 'porcentaje' => 1],
+        'RN' => ['tipoDia' => 'ORD', 'inicio' => '19:00', 'fin' => '06:00', 'porcentaje' => 1.35],
+        'HED' => ['tipoDia' => 'ORD', 'inicio' => '06:00', 'fin' => '19:00', 'porcentaje' => 1.25],
+        'HEN' => ['tipoDia' => 'ORD', 'inicio' => '19:00', 'fin' => '06:00', 'porcentaje' => 1.75],
+        'DF' => ['tipoDia' => 'DF', 'inicio' => '06:00', 'fin' => '19:00', 'porcentaje' => 1.90],
+        'DFRN' => ['tipoDia' => 'DF', 'inicio' => '19:00', 'fin' => '06:00', 'porcentaje' => 2.1],
+        'DFHED' => ['tipoDia' => 'DF', 'inicio' => '06:00', 'fin' => '19:00', 'porcentaje' => 2],
+        'DFHEN' => ['tipoDia' => 'DF', 'inicio' => '19:00', 'fin' => '06:00', 'porcentaje' => 2.5],
     ];
 
     public static function obtenerSegmentos($fecha, $horaEntrada, $horaSalida, $calendario)
@@ -251,7 +251,7 @@ class JornadaLaboral
     public static function esHorarioNocturno(Carbon $fecha, Carbon $hora)
     {
         // Define inicio y fin de horario nocturno
-        $inicioNocturno = Carbon::parse($fecha->format('Y-m-d') . ' 17:00:01');
+        $inicioNocturno = Carbon::parse($fecha->format('Y-m-d') . ' 19:00:01');
         $finNocturno = Carbon::parse($fecha->format('Y-m-d') . ' 06:00:00')->addDay();
         // Log::info("Verificando horario nocturno para {$hora}: entre {$inicioNocturno} y {$finNocturno}");
         // Si la hora es después de las 22:00 o antes de las 06:00 siguiente,
@@ -326,6 +326,7 @@ class JornadaLaboral
             '01-06', // Reyes Magos
             '03-19', // San José
             '06-29', // San Pedro y San Pablo
+            '07-09', //Nuestra Señora del Rosario de Chiquinquirá
             '08-15', // Asunción de la Virgen
             '10-12', // Día de la Raza
             '11-01', // Todos los Santos
